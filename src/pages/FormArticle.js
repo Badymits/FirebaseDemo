@@ -1,11 +1,11 @@
 import { useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import {collection, addDoc} from 'firebase/firestore';
 import {db} from '../firebase/config'
 // styles
 import './create.css'
 
-export default function Create() {  
+export default function Create({ user }) {  
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [body, setBody] = useState('')
@@ -28,7 +28,9 @@ export default function Create() {
 
   return (
     <div className="create">
-      <h2 className="text-2xl pb-2 font-semibold">Add a New Recipe</h2>
+      { user ?
+        <div>
+          <h2 className="text-2xl pb-2 font-semibold">Add a New Recipe</h2>
       <form onSubmit={handleSubmit} className='border-[1px] pl-7'>
 
         <label>
@@ -65,6 +67,9 @@ export default function Create() {
 
         <button className="btn">submit</button>
       </form>
+        </div>
+      : <Navigate to='/login'/> }
+      
     </div>
   )
 }

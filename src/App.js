@@ -1,7 +1,7 @@
 import './App.css';
 //import Modal from './components/Modal';
 //import ReminderList from './components/ReminderList';
-import { BrowserRouter, Route, NavLink, Routes,Navigate , Link} from 'react-router-dom'
+import { BrowserRouter, Route, NavLink, Routes,Navigate , Link, useNavigate} from 'react-router-dom'
 
 import React, {useState} from 'react';
 
@@ -10,52 +10,39 @@ import Contact from './pages/Contact'
 import Home from './pages/Home'
 import Article from './pages/Article'
 import FormArticle from './pages/FormArticle'
+import Login from './pages/Login';
+
 
 function App() {
-  // const articles = [
-  //   {
-  //     "id": "1",
-  //     "title": "Welcome to the Site",
-  //     "author": "Mario",
-  //     "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, ullam eos dignissimos aperiam rerum qui suscipit cum nobis, totam ea tenetur perferendis praesentium corporis possimus ducimus et minima voluptatum. Numquam mollitia culpa consectetur unde illum est aut dicta eligendi vero molestias impedit sint, maiores saepe voluptas necessitatibus excepturi ducimus repudiandae, non quidem nobis veritatis! Libero neque, cumque illo est corrupti eaque recusandae ipsum, ut debitis vitae molestias deleniti voluptates distinctio sapiente autem. Tempore aperiam minima sit atque, tempora doloribus blanditiis id ipsum. Distinctio quos nisi, totam sunt ex voluptatum? Neque alias laborum ipsum doloremque fuga earum in autem. Hic alias omnis facilis facere eum assumenda deleniti ad, maiores laudantium temporibus odio non, molestiae dolorum! Quo mollitia ex sapiente maiores excepturi?"
-  //   },
-  //   {
-  //     "id": "2",
-  //     "title": "5 React Tips for Beginners",
-  //     "author": "Luigi",
-  //     "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, ullam eos dignissimos aperiam rerum qui suscipit cum nobis, totam ea tenetur perferendis praesentium corporis possimus ducimus et minima voluptatum. Numquam mollitia culpa consectetur unde illum est aut dicta eligendi vero molestias impedit sint, maiores saepe voluptas necessitatibus excepturi ducimus repudiandae, non quidem nobis veritatis! Libero neque, cumque illo est corrupti eaque recusandae ipsum, ut debitis vitae molestias deleniti voluptates distinctio sapiente autem. Tempore aperiam minima sit atque, tempora doloribus blanditiis id ipsum. Distinctio quos nisi, totam sunt ex voluptatum? Neque alias laborum ipsum doloremque fuga earum in autem. Hic alias omnis facilis facere eum assumenda deleniti ad, maiores laudantium temporibus odio non, molestiae dolorum! Quo mollitia ex sapiente maiores excepturi?"
-  //   },
-  //   {
-  //     "id": "3",
-  //     "title": "VS Code Best Packages",
-  //     "author": "Mario",
-  //     "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, ullam eos dignissimos aperiam rerum qui suscipit cum nobis, totam ea tenetur perferendis praesentium corporis possimus ducimus et minima voluptatum. Numquam mollitia culpa consectetur unde illum est aut dicta eligendi vero molestias impedit sint, maiores saepe voluptas necessitatibus excepturi ducimus repudiandae, non quidem nobis veritatis! Libero neque, cumque illo est corrupti eaque recusandae ipsum, ut debitis vitae molestias deleniti voluptates distinctio sapiente autem. Tempore aperiam minima sit atque, tempora doloribus blanditiis id ipsum. Distinctio quos nisi, totam sunt ex voluptatum? Neque alias laborum ipsum doloremque fuga earum in autem. Hic alias omnis facilis facere eum assumenda deleniti ad, maiores laudantium temporibus odio non, molestiae dolorum! Quo mollitia ex sapiente maiores excepturi?"
-  //   }
-  // ];
+
+  const [ user, setUser ] = useState(false)
+
+  const logoutUser = () => {
+    setUser(false)
+  }
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <nav className='pt-4'>
+    <div className={user ? 'App' : 'max-w-full'}>
+        <nav className={ user ? ' pt-4' : 'hidden'}>
           <h1 className='text-3xl'>My Articles</h1>
+          
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/new">New Article</NavLink>
-          <NavLink to="/login">Logout</NavLink>
+          <NavLink to="/login" onClick={() => logoutUser()}>Logout</NavLink>
         </nav>
         
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/about" element={<About /> }/>
-          <Route path="/contact" element={<Contact /> }/>
-          <Route path="/articles/:urlId" element={<Article/> }/>
-          <Route path="/new" element={<FormArticle /> }/>
-          <Route path="/login" element={<FormArticle /> }/>
+          <Route path="/" element={<Home  user={user}/>}/>
+          <Route path="/about" element={<About  user={user}/> }/>
+          <Route path="/contact" element={<Contact  user={user}/> }/>
+          <Route path="/articles/:urlId" element={<Article user={user}/> }/>
+          <Route path="/new" element={<FormArticle user={user}/> }/>
+          <Route path="/login" element={<Login user={user}/> }/>
           <Route path="/*" element={<Navigate to="/"/> }/>
         </Routes>
 
-      </BrowserRouter>
     </div>
   );
 }
