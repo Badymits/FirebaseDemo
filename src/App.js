@@ -1,7 +1,7 @@
 import './App.css';
 //import Modal from './components/Modal';
 //import ReminderList from './components/ReminderList';
-import { BrowserRouter, Route, NavLink, Routes,Navigate , Link, useNavigate} from 'react-router-dom'
+import {  Route, NavLink, Routes,Navigate } from 'react-router-dom'
 
 import React, {useState} from 'react';
 
@@ -15,10 +15,17 @@ import Login from './pages/Login';
 
 function App() {
 
-  const [ user, setUser ] = useState(false)
+  const [ user, setUser ] = useState(() => 
+    localStorage.getItem('uid') ? localStorage.getItem('uid') : false
+  )
 
   const logoutUser = () => {
     setUser(false)
+    localStorage.removeItem('uid')
+  }
+
+  const onSuccess = () => {
+    setUser(localStorage.getItem('uid'))
   }
 
   return (
@@ -39,7 +46,7 @@ function App() {
           <Route path="/contact" element={<Contact  user={user}/> }/>
           <Route path="/articles/:urlId" element={<Article user={user}/> }/>
           <Route path="/new" element={<FormArticle user={user}/> }/>
-          <Route path="/login" element={<Login user={user}/> }/>
+          <Route path="/login" element={<Login user={user} onSuccess={onSuccess}/> }/>
           <Route path="/*" element={<Navigate to="/"/> }/>
         </Routes>
 
