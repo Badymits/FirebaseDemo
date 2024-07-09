@@ -2,12 +2,13 @@ import {initializeApp} from 'firebase/app'
 import {getFirestore} from 'firebase/firestore'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCRwWd1E7JJiSuHK-J3FRXj8wjK3-WO84E",
-    authDomain: "reactdemojuly2024.firebaseapp.com",
-    projectId: "reactdemojuly2024",
-    storageBucket: "reactdemojuly2024.appspot.com",
-    messagingSenderId: "140474381397",
-    appId: "1:140474381397:web:314537f93c0cd60f1090dc"
+  apiKey: "AIzaSyDyIuQp63U5tp1hUeRfS4O-6FQCOb7zxmw",
+  authDomain: "reactdemo2024-7a847.firebaseapp.com",
+  projectId: "reactdemo2024-7a847",
+  storageBucket: "reactdemo2024-7a847.appspot.com",
+  messagingSenderId: "712244888759",
+  appId: "1:712244888759:web:10a4633b5fa8a44ac6b932",
+  measurementId: "G-GB52ECB9SP"
 };
 
   initializeApp(firebaseConfig);

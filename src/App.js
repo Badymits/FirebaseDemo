@@ -36,20 +36,22 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <nav>
-          <h1>My Articles</h1>
+        <nav className='pt-4'>
+          <h1 className='text-3xl'>My Articles</h1>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/new">New Article</NavLink>
+          <NavLink to="/login">Logout</NavLink>
         </nav>
-
+        
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/about" element={<About /> }/>
           <Route path="/contact" element={<Contact /> }/>
           <Route path="/articles/:urlId" element={<Article/> }/>
           <Route path="/new" element={<FormArticle /> }/>
+          <Route path="/login" element={<FormArticle /> }/>
           <Route path="/*" element={<Navigate to="/"/> }/>
         </Routes>
 
