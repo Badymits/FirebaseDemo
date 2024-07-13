@@ -17,14 +17,14 @@ export default function Home({ user }) {
 
   useEffect(() => {
     const ref = collection(db, 'article');
-    // onSnapshot(ref, (snapshot)=>{
-    //     console.log(snapshot);
-    //     let results = []
-    //      snapshot.docs.forEach(doc => {
-    //        results.push({id: doc.id, ...doc.data()});
-    //      });
-    //     setArticles(results);
-    //   })
+    onSnapshot(ref, (snapshot)=>{
+        console.log(snapshot);
+        let results = []
+         snapshot.docs.forEach(doc => {
+           results.push({id: doc.id, ...doc.data()});
+         });
+        setArticles(results);
+      })
 
     getDocs(ref)
       .then((snapshot)=>{
@@ -35,7 +35,7 @@ export default function Home({ user }) {
         });
         setArticles(results);
       })    
-  },[article])
+  },[])
 
   
   const handleDelete = async (id) => {
