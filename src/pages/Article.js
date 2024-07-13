@@ -12,7 +12,7 @@ export default function Article() {
   const [article, setArticle] = useState(null);
 
   useEffect(() => {
-    const ref = doc(db, 'articles', urlId);
+    const ref = doc(db, 'article', urlId);
     getDoc(ref)
       .then((snapshot)=>{        
         setArticle(snapshot.data());
